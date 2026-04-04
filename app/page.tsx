@@ -10,14 +10,14 @@ import { CategoriaMarketplace, OrdenPor } from '@/lib/types/producto';
 import ProductoCard from '@/components/brewchain/ProductoCard';
 import CartModal from '@/components/brewchain/CartModal';
 
-const CATEGORIAS: { label: string; value: string }[] = [
-  { label: 'Todo', value: 'todo' },
-  { label: '🔥 Tostado', value: 'lote_tostado' },
-  { label: '🌱 Verde·FOB', value: 'lote_verde' },
-  { label: '🔄 Suscripción', value: 'suscripcion' },
-  { label: '🏪 B2B Granel', value: 'b2b_granel' },
-  { label: '💊 Cápsulas', value: 'capsula' },
-  { label: '⚙️ Accesorios', value: 'accesorio' },
+const CATEGORIAS: { label: string; value: string; color: string; bg: string; border: string }[] = [
+  { label: 'Todo',          value: 'todo',        color: '#FBF6EE', bg: '#4B5563',        border: '#6B7280' },
+  { label: '🔥 Tostado',   value: 'lote_tostado', color: '#FEF3C7', bg: '#B45309',        border: '#D97706' },
+  { label: '🌱 Verde·FOB', value: 'lote_verde',   color: '#DCFCE7', bg: '#15803D',        border: '#22C55E' },
+  { label: '🔄 Suscripción',value: 'suscripcion', color: '#EDE9FE', bg: '#4338CA',        border: '#6D28D9' },
+  { label: '🏪 B2B Granel', value: 'b2b_granel',  color: '#DBEAFE', bg: '#1D4ED8',        border: '#3B82F6' },
+  { label: '💊 Cápsulas',   value: 'capsula',     color: '#F3E8FF', bg: '#7C3AED',        border: '#A855F7' },
+  { label: '⚙️ Accesorios', value: 'accesorio',   color: '#CCFBF1', bg: '#0F766E',        border: '#14B8A6' },
 ];
 
 const ORDEN_OPCIONES: { label: string; value: OrdenPor }[] = [
@@ -242,11 +242,27 @@ export default function MarketplacePage() {
 
           {/* Pills de categoría */}
           <div style={{ display: 'flex', gap: '0.5rem', overflowX: 'auto', paddingBottom: '0.5rem', scrollbarWidth: 'none' }}>
-            {CATEGORIAS.map(c => (
-              <button key={c.value} onClick={() => setCategoriaActiva(c.value)} style={{ background: categoriaActiva === c.value ? '#8B5E3C' : 'rgba(59,31,8,0.6)', color: categoriaActiva === c.value ? '#FBF6EE' : '#C49A6C', border: `1px solid ${categoriaActiva === c.value ? '#8B5E3C' : 'rgba(196,154,108,0.2)'}`, borderRadius: 100, padding: '0.45rem 1rem', fontSize: '0.82rem', fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0 }}>
-                {c.label}
-              </button>
-            ))}
+            {CATEGORIAS.map(c => {
+              const active = categoriaActiva === c.value;
+              return (
+                <button key={c.value} onClick={() => setCategoriaActiva(c.value)} style={{
+                  background: active ? c.bg : `${c.bg}22`,
+                  color: active ? c.color : `${c.border}CC`,
+                  border: `1px solid ${active ? c.border : `${c.border}44`}`,
+                  borderRadius: 100,
+                  padding: '0.45rem 1rem',
+                  fontSize: '0.82rem',
+                  fontWeight: active ? 700 : 500,
+                  cursor: 'pointer',
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0,
+                  transition: 'all 0.15s',
+                  boxShadow: active ? `0 0 10px ${c.bg}55` : 'none',
+                }}>
+                  {c.label}
+                </button>
+              );
+            })}
           </div>
 
           {/* Ordenar por */}
