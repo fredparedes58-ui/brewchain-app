@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Fondo -->
+  <rect width="512" height="512" rx="80" fill="#1A0D05"/>
+  <!-- Taza de café -->
+  <g transform="translate(256,256)">
+    <!-- Cuerpo de la taza -->
+    <rect x="-100" y="-60" width="200" height="140" rx="16" fill="#8B5E3C"/>
+    <!-- Asa -->
+    <path d="M100,-20 Q150,-20 150,40 Q150,100 100,100" fill="none" stroke="#8B5E3C" stroke-width="24" stroke-linecap="round"/>
+    <!-- Interior -->
+    <rect x="-84" y="-44" width="168" height="108" rx="10" fill="#3B1F08"/>
+    <!-- Vapor 1 -->
+    <path d="M-40,-100 Q-30,-130 -40,-160" fill="none" stroke="#C49A6C" stroke-width="10" stroke-linecap="round"/>
+    <!-- Vapor 2 -->
+    <path d="M0,-90 Q10,-120 0,-150" fill="none" stroke="#C49A6C" stroke-width="10" stroke-linecap="round"/>
+    <!-- Vapor 3 -->
+    <path d="M40,-100 Q50,-130 40,-160" fill="none" stroke="#C49A6C" stroke-width="10" stroke-linecap="round"/>
+    <!-- Platillo -->
+    <ellipse cx="0" cy="90" rx="120" ry="16" fill="#8B5E3C"/>
+    <!-- Café en la taza -->
+    <ellipse cx="0" cy="-20" rx="80" ry="20" fill="#C49A6C" opacity="0.4"/>
+    <!-- QR mini (trazabilidad) -->
+    <rect x="-28" y="-44" width="14" height="14" rx="2" fill="#C49A6C" opacity="0.6"/>
+    <rect x="-10" y="-44" width="14" height="14" rx="2" fill="#C49A6C" opacity="0.6"/>
+    <rect x="-28" y="-26" width="14" height="14" rx="2" fill="#C49A6C" opacity="0.6"/>
+    <rect x="-10" y="-26" width="6" height="6" rx="1" fill="#C49A6C" opacity="0.6"/>
+    <rect x="2" y="-26" width="6" height="6" rx="1" fill="#C49A6C" opacity="0.6"/>
+  </g>
+</svg>

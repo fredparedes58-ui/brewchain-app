@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --espresso: #1A0D05;
+    --tostado: #3B1F08;
+    --caramelo: #8B5E3C;
+    --latte: #C49A6C;
+    --crema: #FBF6EE;
+    --verde: #1B5E30;
+    --eudr: #1A2E5C;
+  }
+  body {
+    background-color: #1A0D05;
+    color: #FBF6EE;
+    font-family: Inter, system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(59, 31, 8, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(196, 154, 108, 0.2);
+  }
+  .card-brewchain {
+    background: #3B1F08;
+    border: 1px solid rgba(196, 154, 108, 0.15);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+  .semaforo-verde { background-color: #1B5E30; color: #FBF6EE; }
+  .semaforo-amber { background-color: #D97706; color: #FBF6EE; }
+  .semaforo-rojo { background-color: #DC2626; color: #FBF6EE; }
+  .btn-primary {
+    background-color: #8B5E3C;
+    color: #FBF6EE;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary:hover { background-color: #C49A6C; color: #1A0D05; }
+  .btn-danger {
+    background-color: #DC2626;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+  }
+}
+
+/* Gradient cards */
+.card-gradient-brown {
+  background: linear-gradient(135deg, rgba(59,31,8,0.95) 0%, rgba(26,13,5,0.98) 100%);
+  border: 1px solid rgba(196,154,108,0.2);
+  border-radius: 20px;
+}
+.card-gradient-green {
+  background: linear-gradient(135deg, #1B5E30 0%, #0f3a1c 100%);
+  border: 1px solid rgba(74,222,128,0.2);
+  border-radius: 20px;
+}
+.card-gradient-hero {
+  background: linear-gradient(145deg, rgba(59,31,8,0.9) 0%, rgba(139,94,60,0.4) 50%, rgba(26,13,5,0.95) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(196,154,108,0.15);
+  border-radius: 20px;
+}
+.pill {
+  border-radius: 100px;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid rgba(196,154,108,0.25);
+  background: rgba(59,31,8,0.6);
+  color: #C49A6C;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.pill.active {
+  background: #8B5E3C;
+  color: #FBF6EE;
+  border-color: #8B5E3C;
+}
+.pill-green.active {
+  background: #1B5E30;
+  color: #4ADE80;
+  border-color: #1B5E30;
+}
+.search-bar {
+  background: rgba(59,31,8,0.8);
+  border: 1px solid rgba(196,154,108,0.25);
+  border-radius: 100px;
+  padding: 0.65rem 1.25rem;
+  color: #FBF6EE;
+  font-size: 0.9rem;
+  width: 100%;
+  outline: none;
+}
+.search-bar::placeholder { color: #8B5E3C; }
+.search-bar:focus { border-color: rgba(196,154,108,0.5); }
