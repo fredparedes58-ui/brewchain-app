@@ -56,7 +56,14 @@ const ROLES_VENDER = [
   },
 ];
 
-const ROLES_COMPRAR = ['Todos', 'Consumidor', 'Cafetería', 'Tostaduria', 'Importadora', 'Caficultor'];
+const ROLES_COMPRAR: { label: string; icon: string; sub: string; desc: string; color: string; bg: string; border: string; route: string | null; roleId: string | null }[] = [
+  { label: 'Todos',      icon: '☕', sub: '',     desc: 'Ver todo el marketplace',                                  color: '#FBF6EE', bg: '#3D2008', border: '#8B5E3C', route: null,   roleId: null },
+  { label: 'Consumidor', icon: '👤', sub: 'M06', desc: 'Descubrí café por perfil sensorial, escaneá QR y acumulá puntos de fidelización', color: '#FEF9EC', bg: '#92400E', border: '#D97706', route: '/m06', roleId: 'M06' },
+  { label: 'Cafetería',  icon: '🏪', sub: 'M05', desc: 'Gestioná QR en sala, analytics de escaneos y aprovisionamiento B2B',            color: '#ECFDF5', bg: '#065F46', border: '#10B981', route: '/m05', roleId: 'M05' },
+  { label: 'Tostaduria', icon: '🔥', sub: 'M03', desc: 'Generá QRs de trazabilidad, gestioná suscripciones D2C y perfiles de tueste',   color: '#FFF7ED', bg: '#7C2D12', border: '#EA580C', route: '/m03', roleId: 'M03' },
+  { label: 'Importadora',icon: '🚢', sub: 'M02', desc: 'Dashboard EUDR, catálogo de lotes, wish list inversa y cupping CVA 2024',       color: '#EFF6FF', bg: '#1E3A5F', border: '#3B82F6', route: '/m02', roleId: 'M02' },
+  { label: 'Caficultor', icon: '🌱', sub: 'M01', desc: 'Registrá tu parcela GPS, monitoreá precio ICO y alertas agronómicas',          color: '#F0FDF4', bg: '#14532D', border: '#22C55E', route: '/m01', roleId: 'M01' },
+];
 
 // Calcula score de relevancia (0–100) para lotes
 function relevanciaLote(lote: (typeof MOCK_LOTES)[0]): number {
@@ -228,16 +235,64 @@ export default function MarketplacePage() {
             />
           </div>
 
-          {/* Filtro Soy: */}
-          <div style={{ marginBottom: '0.75rem' }}>
-            <span style={{ fontSize: '0.75rem', color: '#8B5E3C', marginRight: '0.5rem' }}>Soy:</span>
-            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '0.4rem' }}>
-              {ROLES_COMPRAR.map(r => (
-                <button key={r} onClick={() => setRolFiltro(r)} style={{ background: rolFiltro === r ? '#8B5E3C' : 'rgba(59,31,8,0.6)', color: rolFiltro === r ? '#FBF6EE' : '#C49A6C', border: `1px solid ${rolFiltro === r ? '#8B5E3C' : 'rgba(196,154,108,0.2)'}`, borderRadius: 100, padding: '0.4rem 0.9rem', fontSize: '0.78rem', fontWeight: 600, cursor: 'pointer' }}>
-                  {r}
-                </button>
-              ))}
+          {/* Filtro Soy: → acceso directo a cada módulo */}
+          <div style={{ marginBottom: '1rem' }}>
+            <div style={{ fontSize: '0.7rem', color: '#8B5E3C', textTransform: 'uppercase', letterSpacing: 1.5, marginBottom: '0.6rem' }}>Soy:</div>
+            <div style={{ display: 'flex', gap: '0.5rem', overflowX: 'auto', paddingBottom: '0.25rem', scrollbarWidth: 'none' }}>
+              {ROLES_COMPRAR.map(r => {
+                const active = rolFiltro === r.label;
+                return (
+                  <button
+                    key={r.label}
+                    onClick={() => {
+                      setRolFiltro(r.label);
+                      if (r.route && r.roleId) {
+                        const userMap: Record<string, { nombre: string; email: string }> = {
+                          M01: { nombre: 'Carlos Moya', email: 'carlos@finca.co' },
+                          M02: { nombre: 'Ana García', email: 'ana@greenorigin.es' },
+                          M03: { nombre: 'Pedro Ruiz', email: 'pedro@tostaderia.es' },
+                          M05: { nombre: 'Luis Café', email: 'luis@cafeteria.es' },
+                          M06: { nombre: 'María López', email: 'maria@consumer.es' },
+                        };
+                        const u = userMap[r.roleId];
+                        if (u) login({ userId: 'user-demo', nombre: u.nombre, email: u.email, role: r.roleId as 'M01'|'M02'|'M03'|'M05'|'M06', pais: 'Colombia' });
+                        router.push(r.route);
+                      }
+                    }}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: '0.35rem',
+                      background: active ? r.bg : `${r.bg}33`,
+                      color: active ? r.color : `${r.border}BB`,
+                      border: `1px solid ${active ? r.border : `${r.border}44`}`,
+                      borderRadius: 100,
+                      padding: '0.45rem 1rem',
+                      fontSize: '0.82rem',
+                      fontWeight: active ? 700 : 500,
+                      cursor: 'pointer',
+                      whiteSpace: 'nowrap',
+                      flexShrink: 0,
+                      transition: 'all 0.15s',
+                      boxShadow: active ? `0 0 12px ${r.border}55` : 'none',
+                    }}
+                    title={r.desc}
+                  >
+                    <span>{r.icon}</span>
+                    <span>{r.label}</span>
+                    {r.sub && <span style={{ fontSize: '0.65rem', opacity: 0.7 }}>{r.sub}</span>}
+                    {r.route && <span style={{ fontSize: '0.65rem', opacity: active ? 0.9 : 0.5 }}>→</span>}
+                  </button>
+                );
+              })}
             </div>
+            {/* Descripción del rol activo */}
+            {rolFiltro !== 'Todos' && (() => {
+              const rol = ROLES_COMPRAR.find(r => r.label === rolFiltro);
+              return rol ? (
+                <div style={{ marginTop: '0.6rem', fontSize: '0.78rem', color: '#C49A6C', padding: '0.5rem 0.75rem', background: `${rol.bg}22`, borderRadius: 8, border: `1px solid ${rol.border}33` }}>
+                  {rol.icon} <strong style={{ color: rol.border }}>{rol.label}</strong> — {rol.desc}
+                </div>
+              ) : null;
+            })()}
           </div>
 
           {/* Pills de categoría */}
