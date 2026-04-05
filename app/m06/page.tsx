@@ -104,6 +104,13 @@ export default function M06Feed() {
           ))}
           <style>{`@keyframes pulse { 0%,100% { opacity:0.4; } 50% { opacity:0.7; } }`}</style>
         </div>
+      ) : recomendaciones.length === 0 ? (
+        <div style={{ textAlign: 'center', padding: '2.5rem 1rem', color: '#8B5E3C' }}>
+          <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>☕</div>
+          <div style={{ fontWeight: 700, color: '#C49A6C', marginBottom: '0.4rem' }}>Sin recomendaciones disponibles</div>
+          <div style={{ fontSize: '0.82rem' }}>Completa el quiz sensorial para recibir sugerencias personalizadas</div>
+          <Link href="/m06/quiz" style={{ display: 'inline-block', marginTop: '1rem', background: '#8B5E3C', color: '#FBF6EE', padding: '0.6rem 1.25rem', borderRadius: 100, textDecoration: 'none', fontWeight: 700, fontSize: '0.85rem' }}>Hacer quiz →</Link>
+        </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
           {recomendaciones.map((r) => (

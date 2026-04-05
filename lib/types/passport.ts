@@ -34,7 +34,7 @@ export interface PassportData {
 
   // EUDR
   eudr_hash?: string;
-  eudr_compliant?: boolean;
+  eudr_compliant: boolean; // required — false si lote no cumple EUDR
 
   // Metadata
   lote_id: string;

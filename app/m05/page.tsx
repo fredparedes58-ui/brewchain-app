@@ -13,9 +13,14 @@ export default function M05QRSala() {
   hace30.setDate(hace30.getDate() - 30);
   const scans = eventos.filter(e => new Date(e.timestamp) >= hace30).length;
   const [menuQRs] = useState([
-    { nombre: 'Colombia Anaeróbico · Carlos Muñoz', hash: 'a3f2e1b4c9d8', cupping: 91.0, precio: '€3.80', notas: 'Piña, maracuyá, fermentación controlada' },
-    { nombre: 'Gesha Natural · Rosa Vargas', hash: 'b4e3f2a1d0c7', cupping: 92.0, precio: '€4.50', notas: 'Jazmín, melocotón, bergamota' },
-    { nombre: 'Guatemala Pacamara · José Alvarado', hash: 'c5d4e3b2a1f8', cupping: 89.5, precio: '€3.60', notas: 'Ciruela, cacao, acidez cítrica' },
+    { nombre: 'Colombia Anaeróbico · Carlos Muñoz', hash: 'a3f2e1b4c9d8', cupping: 91.0, precio: '€3.80', notas: 'Piña, maracuyá, fermentación 72h', origen: 'Colombia · Huila', proceso: 'Anaeróbico' },
+    { nombre: 'Kenia SL28 · Peter Kamau', hash: 'b7d4c2e1f9a3', cupping: 91.5, precio: '€4.20', notas: 'Grosella negra, pomelo, acidez vino', origen: 'Kenia · Kirinyaga', proceso: 'Lavado' },
+    { nombre: 'El Salvador Bourbon · María Cruz', hash: 'c5e8f3a2d1b6', cupping: 88.5, precio: '€3.50', notas: 'Cereza, ciruela, chocolate con leche', origen: 'El Salvador · Santa Ana', proceso: 'Natural' },
+    { nombre: 'Etiopía Yirgacheffe · Amara Tadesse', hash: 'd2a7b4c9e1f3', cupping: 90.5, precio: '€3.90', notas: 'Arándano, fresa, floral intenso', origen: 'Etiopía · Yirgacheffe', proceso: 'Natural' },
+    { nombre: 'Colombia Gesha · Rosa Vargas', hash: 'e3f1a8c4b2d7', cupping: 92.0, precio: '€5.20', notas: 'Jazmín, melocotón, bergamota, té', origen: 'Colombia · Nariño', proceso: 'Natural' },
+    { nombre: 'Guatemala Pacamara · José Alvarado', hash: 'f4e2c7a1b5d9', cupping: 89.5, precio: '€3.60', notas: 'Ciruela, cacao, acidez cítrica', origen: 'Guatemala · Antigua', proceso: 'Lavado' },
+    { nombre: 'Kenia SL34 Nyeri · Peter Kamau', hash: 'a1b8d5f3e2c4', cupping: 93.0, precio: '€4.80', notas: 'Albaricoque, mora, caramelo, cremoso', origen: 'Kenia · Nyeri AA', proceso: 'Lavado' },
+    { nombre: 'Honduras Honey · Roberto Flores', hash: 'c9d3f7a2e1b6', cupping: 85.0, precio: '€3.20', notas: 'Panela, durazno, miel, suave', origen: 'Honduras · Copán', proceso: 'Honey' },
   ]);
 
   return (
@@ -52,14 +57,14 @@ export default function M05QRSala() {
         <div style={{ fontSize: '0.75rem', color: '#C49A6C', textTransform: 'uppercase', letterSpacing: 1, marginBottom: '0.75rem' }}>Cafés con QR activo</div>
         {menuQRs.map((item) => (
           <div key={item.hash} style={{ background: '#3B1F08', borderRadius: 10, padding: '1rem 1.25rem', marginBottom: '0.5rem', border: '1px solid rgba(196,154,108,0.12)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontWeight: 600, fontSize: '0.95rem' }}>{item.nombre}</div>
-              <div style={{ fontSize: '0.78rem', color: '#C49A6C', fontStyle: 'italic', marginTop: 2 }}>"{item.notas}"</div>
-              <div style={{ fontSize: '0.72rem', color: '#8B5E3C', marginTop: 4, fontFamily: 'monospace' }}>brewchain.app/lote/{item.hash}</div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontWeight: 700, fontSize: '0.9rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.nombre}</div>
+              <div style={{ fontSize: '0.73rem', color: '#C49A6C', marginTop: 1 }}>{(item as {origen?:string}).origen ?? ''} · {(item as {proceso?:string}).proceso ?? ''}</div>
+              <div style={{ fontSize: '0.7rem', color: '#8B5E3C', fontStyle: 'italic', marginTop: 2 }}>"{item.notas}"</div>
             </div>
             <div style={{ textAlign: 'right', flexShrink: 0 }}>
-              <div style={{ fontWeight: 700, color: '#FBF6EE' }}>{item.precio}</div>
-              <div style={{ fontSize: '0.72rem', color: '#C49A6C' }}>CVA {item.cupping}</div>
+              <div style={{ fontWeight: 800, color: '#C49A6C' }}>{item.precio}</div>
+              <div style={{ fontSize: '0.7rem', color: '#8B5E3C' }}>☕ {item.cupping}</div>
             </div>
             <Link href={`/lote/${item.hash}`} target="_blank" style={{ background: '#1B5E30', color: 'white', padding: '0.5rem 0.75rem', borderRadius: 8, textDecoration: 'none', fontSize: '0.78rem', fontWeight: 600, flexShrink: 0 }}>
               Ver →

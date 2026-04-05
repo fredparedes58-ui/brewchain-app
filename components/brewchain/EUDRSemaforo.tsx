@@ -40,7 +40,7 @@ export default function EUDRSemaforo({ validation, compact = false }: Props) {
           <div style={{ flex: 1, height: 6, background: 'rgba(255,255,255,0.3)', borderRadius: 3, overflow: 'hidden' }}>
             <div style={{ height: '100%', background: 'white', width: `${validation.compliance_pct}%`, borderRadius: 3 }} />
           </div>
-          <span style={{ color: 'white', fontWeight: 700, fontSize: '0.9rem' }}>{validation.satisfied_count}/12</span>
+          <span style={{ color: 'white', fontWeight: 700, fontSize: '0.9rem' }}>{validation.satisfied_count}/{validation.requirements.length}</span>
         </div>
       </div>
 

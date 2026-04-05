@@ -25,10 +25,20 @@ interface ConsumidorState {
 export const useConsumidorStore = create<ConsumidorState>()(
   persist(
     (set) => ({
-      perfil: null,
-      qrEscaneados: [],
+      // Perfil sensorial por defecto — se sobreescribe al completar el quiz
+      perfil: {
+        intensidad: 'medio' as Intensidad,
+        acidez: 'media' as Acidez,
+        sabores_preferidos: ['chocolate', 'caramelo'] as Sabor[],
+        proceso_preferido: 'lavado',
+        origen_preferido: 'Colombia',
+        completado: false,
+      },
+      qrEscaneados: ['a3f2e1b4c9d8', 'b7d4c2e1f9a3'], // hashes demo pre-escaneados
       setPerfil: (p) => set({ perfil: p }),
-      addQRescaneado: (hash) => set((s) => ({ qrEscaneados: [...s.qrEscaneados, hash] })),
+      addQRescaneado: (hash) => set((s) => ({
+        qrEscaneados: s.qrEscaneados.includes(hash) ? s.qrEscaneados : [...s.qrEscaneados, hash],
+      })),
     }),
     { name: 'brewchain-consumidor' }
   )
