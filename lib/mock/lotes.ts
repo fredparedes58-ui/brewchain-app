@@ -1,29 +1,28 @@
 import { Lote } from '../types/lote';
 
 export const MOCK_LOTES: Lote[] = [
-  // ── COLOMBIA ────────────────────────────────────────────
+  // ── VENEZUELA · AGUA FRÍA (dato real — Curador Coffee SL) ──────────────
   {
     id: 'lot-001',
     caficultor_id: 'caf-001',
-    caficultor_nombre: 'Carlos Humberto Muñoz',
+    caficultor_nombre: 'José Tomás Carrillo',
     parcela_id: 'par-001',
-    pais: 'Colombia',
-    region: 'Huila',
-    variedad: 'Castillo',
-    proceso: 'lavado',
-    altitud_msnm: 1680,
-    fecha_cosecha: '2024-10-15',
-    kilos_disponibles: 500,
-    precio_fob: 6.80,
-    notas_cata: 'Frutos rojos, chocolate amargo, acidez brillante, caramelo en el retrogusto',
-    cupping_score: 87.5,
-    gps_lat: 2.5359,
-    gps_lng: -75.8931,
-    gps_eudr_verified: true,
-    eudr_status: 'green',
-    eudr_compliance_pct: 100,
+    pais: 'Venezuela',
+    region: 'Miranda · Triángulo de los Mocotíes',
+    variedad: 'Pink Bourbon',
+    proceso: 'anaerobico', // lavado anaeróbico: fermentación + lavado + secado solar 14-18 días
+    altitud_msnm: 1200,
+    fecha_cosecha: '2024-10-15', // cosecha Oct 2024 – Ene 2025
+    kilos_disponibles: 120,      // 2 sacos de 60kg
+    precio_fob: 14.85,           // €13.50/kg convertido (fuente: Curador Coffee SL)
+    notas_cata: 'Caramelo, vainilla, naranja, cereza, grosella negra, frambuesa, nuez moscada, almendra · Sedoso · Equilibrado',
+    cupping_score: 85.75,        // SCA score oficial Curador
+    gps_lat: 10.2186,            // GPS aproximado Miranda, Venezuela — pendiente confirmación exacta
+    gps_lng: -66.7032,
+    gps_eudr_verified: false,    // pendiente verificación GPS en campo
+    eudr_status: 'amber',        // amber: GPS no verificado aún, no hay deforestación conocida
+    eudr_compliance_pct: 75,
     estado: 'disponible',
-    imagen_url: '/images/lote-colombia.jpg',
   },
   {
     id: 'lot-002',
@@ -48,25 +47,26 @@ export const MOCK_LOTES: Lote[] = [
     estado: 'disponible',
   },
   {
+    // Tabi Agua Fría — agotado en Curador (out of stock). Lote sellado como demo de pasaporte.
     id: 'lot-005',
     caficultor_id: 'caf-001',
-    caficultor_nombre: 'Carlos Humberto Muñoz',
+    caficultor_nombre: 'José Tomás Carrillo',
     parcela_id: 'par-002',
-    pais: 'Colombia',
-    region: 'Huila',
-    variedad: 'Colombia Anaeróbico',
-    proceso: 'anaerobico',
-    altitud_msnm: 1720,
-    fecha_cosecha: '2024-12-05',
-    kilos_disponibles: 0,
-    precio_fob: 11.20,
-    notas_cata: 'Piña, maracuyá, fermentación controlada 72h, tropical intenso',
-    cupping_score: 91.0,
-    gps_lat: 2.5421,
-    gps_lng: -75.8876,
-    gps_eudr_verified: true,
-    eudr_status: 'green',
-    eudr_compliance_pct: 100,
+    pais: 'Venezuela',
+    region: 'Miranda · Triángulo de los Mocotíes',
+    variedad: 'Tabi',
+    proceso: 'anaerobico', // lavado anaeróbico: fermentación + lavado + secado solar 14-18 días
+    altitud_msnm: 1200,
+    fecha_cosecha: '2024-11-20', // cosecha Oct 2024 – Ene 2025
+    kilos_disponibles: 0,        // agotado (saco de 60kg vendido)
+    precio_fob: 14.85,           // €13.50/kg (€891.00/saco 60kg — fuente: Curador Coffee SL)
+    notas_cata: 'Avellana, trozos de chocolate, nuez moscada, vainilla, cedro, tabaco, manzana roja · Suave · Seco',
+    cupping_score: 84.0,         // SCA score oficial Curador
+    gps_lat: 10.2201,            // GPS aproximado Miranda, Venezuela — pendiente confirmación exacta
+    gps_lng: -66.7018,
+    gps_eudr_verified: false,
+    eudr_status: 'amber',
+    eudr_compliance_pct: 75,
     estado: 'tostado',
     tostador_id: 'tos-001',
     fecha_tueste: '2025-03-10',

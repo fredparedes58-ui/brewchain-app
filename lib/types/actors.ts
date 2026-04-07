@@ -8,6 +8,13 @@ export interface Actor {
   pais: string;
   plan: string;
   created_at: string;
+  // Campos opcionales de trazabilidad de origen
+  estado_region?: string;
+  municipio?: string;
+  asociacion?: string;
+  id_documento?: string;
+  telefono?: string;
+  finca_nombre?: string;
 }
 
 export const ROLE_LABELS: Record<ActorRole, string> = {

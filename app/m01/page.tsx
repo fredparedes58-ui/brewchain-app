@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useAuthStore } from '@/lib/stores/authStore';
 import { useCaficultorStore } from '@/lib/stores/caficultorStore';
 import { MOCK_LOTES } from '@/lib/mock/lotes';
+import { CURRENT_CAFICULTOR, CURRENT_PARCELA } from '@/lib/mock/caficultores';
 import Link from 'next/link';
 import { usePrecioICO } from '@/lib/hooks/usePrecioICO';
 
@@ -30,9 +31,11 @@ export default function M01Dashboard() {
         <div style={{ position: 'absolute', top: -20, right: -20, fontSize: '7rem', opacity: 0.07 }}>🌱</div>
         <div style={{ fontSize: '0.7rem', color: 'rgba(74,222,128,0.7)', letterSpacing: 2, textTransform: 'uppercase', marginBottom: '0.4rem' }}>{saludo.toUpperCase()}</div>
         <div style={{ fontWeight: 900, fontSize: '1.6rem', color: '#FBF6EE', marginBottom: '0.2rem' }}>{nombre || 'Carlos Moya'}</div>
-        <div style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)', marginBottom: '1rem' }}>Finca El Paraíso · Huila, Colombia</div>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(74,222,128,0.15)', border: '1px solid rgba(74,222,128,0.3)', borderRadius: 100, padding: '0.4rem 1rem', fontSize: '0.8rem', color: '#4ADE80', fontWeight: 700 }}>
-          📍 GPS verificado · EUDR compliant
+        <div style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)', marginBottom: '1rem' }}>
+          {CURRENT_CAFICULTOR.finca_nombre ?? 'Mi Finca'} · {CURRENT_CAFICULTOR.municipio ?? CURRENT_CAFICULTOR.estado_region ?? CURRENT_CAFICULTOR.pais}
+        </div>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: CURRENT_PARCELA?.eudr_verified ? 'rgba(74,222,128,0.15)' : 'rgba(251,191,36,0.15)', border: `1px solid ${CURRENT_PARCELA?.eudr_verified ? 'rgba(74,222,128,0.3)' : 'rgba(251,191,36,0.3)'}`, borderRadius: 100, padding: '0.4rem 1rem', fontSize: '0.8rem', color: CURRENT_PARCELA?.eudr_verified ? '#4ADE80' : '#fbbf24', fontWeight: 700 }}>
+          📍 {CURRENT_PARCELA?.eudr_verified ? 'GPS verificado · EUDR compliant' : 'GPS pendiente verificación · EUDR amber'}
         </div>
       </div>
 
