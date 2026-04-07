@@ -73,10 +73,11 @@ export default function M03Dashboard() {
       )}
 
       {/* Quick actions */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }}>
         {[
           { href: '/m03/qr', icon: '📱', label: 'Generar QR', desc: 'Sellar pasaporte digital' },
           { href: '/m03/lotes', icon: '🛒', label: 'Marketplace', desc: 'Ver lotes disponibles' },
+          { href: '/m03/producto/nuevo', icon: '➕', label: 'Nuevo Producto', desc: 'Publicar en marketplace' },
           { href: '/m03/migracion', icon: '⬆️', label: 'Migrar Cropster', desc: 'Importar perfiles históricos' },
         ].map(({ href, icon, label, desc }) => (
           <Link key={href} href={href} style={{ background: '#3B1F08', border: '1px solid rgba(196,154,108,0.15)', borderRadius: 12, padding: '1.25rem', textDecoration: 'none', color: '#FBF6EE', transition: 'border-color 0.15s', display: 'block' }}>
