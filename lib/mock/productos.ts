@@ -21,7 +21,7 @@ export const MOCK_PRODUCTOS: Producto[] = [
   {
     id: 'cap-002',
     nombre: 'Cápsula Blend Suave Mañana',
-    descripcion: 'Blend equilibrado de Colombia y Honduras. Perfecto para espresso suave. Notas de caramelo y frutos secos. Intensidad 5/10.',
+    descripcion: 'Blend equilibrado 65% Colombia Nariño + 35% Honduras Copán. Espresso suave. Notas de caramelo, frutos secos, avellana. Intensidad 5/10.',
     categoria: 'capsula',
     precio: 9.50,
     unidad: 'caja 10 cápsulas',
@@ -29,7 +29,15 @@ export const MOCK_PRODUCTOS: Producto[] = [
     vendedor_nombre: 'Tostadería Origen Madrid',
     vendedor_rol: 'M03',
     disponible: true,
-    eudr_status: 'green',
+    // blend EUDR calculado por s_blend.ts — lot-002 (Colombia 100%) + lot-009 (Honduras amber)
+    is_blend: true,
+    blend_componentes: [
+      { lote_id: 'lot-002', porcentaje: 65 }, // Colombia Nariño Gesha — eudr_status: green
+      { lote_id: 'lot-009', porcentaje: 35 }, // Honduras Copán — eudr_status: amber
+    ],
+    blend_compliance_pct: 91, // 65*100 + 35*75 / 100 = 91.25 → 91
+    cupping_score: 86.5,      // 65*92 + 35*87 / 100 = 90.45 — ajustado por tueste cápsula
+    eudr_status: 'amber',     // amber: un componente Honduras no es 100% compliant
     fecha_creacion: '2025-01-20T10:00:00Z',
   },
   {
@@ -108,7 +116,7 @@ export const MOCK_PRODUCTOS: Producto[] = [
   {
     id: 'b2b-001',
     nombre: 'Granel Blend Espresso House · 25kg',
-    descripcion: 'Blend de espresso diseñado para hostelería. 70% Colombia Huila + 30% Etiopía Yirgacheffe. Tueste medio-oscuro, estable en máquina de barras. Precio garantizado 3 meses.',
+    descripcion: 'Blend hostelería: 70% Colombia Nariño + 30% Etiopía Yirgacheffe. Tueste medio-oscuro. Estable en máquina de barras. Precio garantizado 3 meses. EUDR calculado por lote.',
     categoria: 'b2b_granel',
     precio: 210.00,
     unidad: 'saco 25 kg',
@@ -117,8 +125,15 @@ export const MOCK_PRODUCTOS: Producto[] = [
     vendedor_rol: 'M03',
     disponible: true,
     destacado: true,
-    cupping_score: 86,
-    eudr_status: 'green',
+    // blend EUDR calculado — lot-002 (Colombia 100%) + lot-003 (Etiopía Yirgacheffe 100%)
+    is_blend: true,
+    blend_componentes: [
+      { lote_id: 'lot-002', porcentaje: 70 }, // Colombia Nariño — eudr_status: green
+      { lote_id: 'lot-003', porcentaje: 30 }, // Etiopía Yirgacheffe — eudr_status: green
+    ],
+    blend_compliance_pct: 100, // 70*100 + 30*100 = 100% — ambos lotes green
+    cupping_score: 88,
+    eudr_status: 'green',      // green: todos los lotes 100% compliant
     fecha_creacion: '2025-01-15T10:00:00Z',
   },
   {
@@ -155,7 +170,7 @@ export const MOCK_PRODUCTOS: Producto[] = [
   {
     id: 'b2b-004',
     nombre: 'Blend Descafeinado Swiss Water · 25kg',
-    descripcion: 'Descafeinado sin solventes químicos. Proceso Swiss Water, retención de sabor >95%. Blend Colombia + Honduras. Certificado orgánico EU. Apto para todas las horas del día.',
+    descripcion: 'Descafeinado proceso Swiss Water, retención sabor >95%. 60% Colombia Nariño + 40% Honduras Copán. Sin solventes químicos. Certificado orgánico EU. Apto toda hora.',
     categoria: 'b2b_granel',
     precio: 265.00,
     unidad: 'saco 25 kg',
@@ -163,8 +178,15 @@ export const MOCK_PRODUCTOS: Producto[] = [
     vendedor_nombre: 'Tostadería Origen Madrid',
     vendedor_rol: 'M03',
     disponible: true,
+    // blend EUDR: Colombia green + Honduras amber → blend amber
+    is_blend: true,
+    blend_componentes: [
+      { lote_id: 'lot-002', porcentaje: 60 }, // Colombia Nariño — eudr_status: green
+      { lote_id: 'lot-009', porcentaje: 40 }, // Honduras Copán — eudr_status: amber
+    ],
+    blend_compliance_pct: 90, // 60*100 + 40*75 / 100 = 90
     cupping_score: 84,
-    eudr_status: 'amber',
+    eudr_status: 'amber',     // amber: Honduras no es 100% compliant
     fecha_creacion: '2025-02-20T10:00:00Z',
   },
 

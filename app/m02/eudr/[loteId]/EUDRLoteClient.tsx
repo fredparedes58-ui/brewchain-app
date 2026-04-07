@@ -55,6 +55,11 @@ export default function EUDRLoteClient({ lote }: { lote: Lote }) {
     fetchGFW();
   }, [lote.gps_lat, lote.gps_lng]);
 
+  const descargarPDF = () => {
+    const url = `/api/eudr/declaration/pdf?lote_id=${lote.id}&operador=Green+Origin+SL&eori=ESB-12345678&pais=ES`;
+    window.open(url, '_blank', 'noopener');
+  };
+
   const generarDeclaracion = async () => {
     setGenerando(true);
     try {
@@ -253,23 +258,39 @@ export default function EUDRLoteClient({ lote }: { lote: Lote }) {
             </button>
           )}
 
-          <button
-            onClick={generarDeclaracion}
-            style={{ width: '100%', background: 'none', border: '1px solid rgba(196,154,108,0.2)', color: '#8B5E3C', padding: '0.6rem', borderRadius: 10, cursor: 'pointer', fontSize: '0.82rem' }}
-          >
-            Generar nueva versión
-          </button>
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <button
+              onClick={generarDeclaracion}
+              style={{ flex: 1, background: 'none', border: '1px solid rgba(196,154,108,0.2)', color: '#8B5E3C', padding: '0.6rem', borderRadius: 10, cursor: 'pointer', fontSize: '0.82rem' }}
+            >
+              Generar nueva versión
+            </button>
+            <button
+              onClick={descargarPDF}
+              style={{ flex: 1, background: 'none', border: '1px solid rgba(74,222,128,0.3)', color: '#4ADE80', padding: '0.6rem', borderRadius: 10, cursor: 'pointer', fontSize: '0.82rem', fontWeight: 700 }}
+            >
+              📄 Descargar PDF
+            </button>
+          </div>
         </div>
       ) : (
         <div>
           {lote.eudr_status === 'green' ? (
-            <button
-              onClick={generarDeclaracion}
-              disabled={generando}
-              style={{ width: '100%', background: generando ? '#1B5E3080' : '#1B5E30', color: 'white', padding: '1rem', borderRadius: 12, border: 'none', cursor: generando ? 'wait' : 'pointer', fontWeight: 700, fontSize: '1rem', marginBottom: '0.75rem' }}
-            >
-              {generando ? '⏳ Generando declaración...' : '📄 Generar Declaración TRACES (1 clic)'}
-            </button>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '0.75rem' }}>
+              <button
+                onClick={generarDeclaracion}
+                disabled={generando}
+                style={{ width: '100%', background: generando ? '#1B5E3080' : '#1B5E30', color: 'white', padding: '1rem', borderRadius: 12, border: 'none', cursor: generando ? 'wait' : 'pointer', fontWeight: 700, fontSize: '1rem' }}
+              >
+                {generando ? '⏳ Generando declaración...' : '📋 Generar Declaración TRACES (JSON)'}
+              </button>
+              <button
+                onClick={descargarPDF}
+                style={{ width: '100%', background: 'rgba(27,94,48,0.15)', color: '#4ADE80', padding: '0.875rem', borderRadius: 12, border: '1px solid rgba(74,222,128,0.3)', cursor: 'pointer', fontWeight: 700, fontSize: '0.95rem' }}
+              >
+                📄 Descargar DDS como PDF (abre nueva pestaña → Ctrl+P)
+              </button>
+            </div>
           ) : (
             <div style={{ background: 'rgba(220,38,38,0.1)', border: '1px solid rgba(220,38,38,0.25)', borderRadius: 12, padding: '1rem', marginBottom: '0.75rem', fontSize: '0.85rem', color: '#fca5a5' }}>
               ✗ No se puede generar declaración. El lote debe estar 100% EUDR compliant.

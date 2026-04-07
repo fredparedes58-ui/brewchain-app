@@ -16,6 +16,15 @@ export type OrdenPor =
   | 'mas_reciente'
   | 'eudr_primero';
 
+/**
+ * Componente de un blend: referencia a un lote con su porcentaje.
+ * La suma de todos los porcentajes en un blend DEBE ser 100.
+ */
+export interface BlendComponente {
+  lote_id: string;   // ID del lote en MOCK_LOTES o Supabase
+  porcentaje: number; // 0-100, suma total debe ser 100
+}
+
 export interface Producto {
   id: string;
   nombre: string;
@@ -32,4 +41,9 @@ export interface Producto {
   eudr_status?: 'green' | 'amber' | 'red';
   suscripcion_frecuencia?: 'semanal' | 'quincenal' | 'mensual' | 'trimestral';
   fecha_creacion: string;
+
+  // ── Campos de blend multi-origen (Ítem 3) ─────────────────
+  is_blend?: boolean;
+  blend_componentes?: BlendComponente[];  // lotes + porcentajes
+  blend_compliance_pct?: number;          // calculado por s_blend.calculateBlendEUDR()
 }
