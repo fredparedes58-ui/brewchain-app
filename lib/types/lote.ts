@@ -43,6 +43,7 @@ export interface Parcela {
   hectareas: number;
   eudr_verified: boolean;
   created_at: string;
+  foto_url?: string; // base64 data URL de la foto capturada en campo
 }
 
 export interface CuppingResult {

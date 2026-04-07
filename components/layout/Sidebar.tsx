@@ -34,8 +34,11 @@ const NAV_BY_ROLE: Record<ActorRole, NavItem[]> = {
     { label: 'Migrar Cropster', href: '/m03/migracion', icon: '⬆️' },
   ],
   M04: [
-    { label: 'Dashboard', href: '/m03', icon: '📊' },
-    { label: 'Generar QR', href: '/m03/qr', icon: '📱' },
+    { label: 'Dashboard', href: '/m04', icon: '📊' },
+    { label: 'Recibir lote verde', href: '/m04/recibir', icon: '📥' },
+    { label: 'Registrar tueste', href: '/m04/tueste', icon: '🔥' },
+    { label: 'Historial tostados', href: '/m04/historial', icon: '📜' },
+    { label: 'Marketplace', href: '/m04/marketplace', icon: '🛒' },
   ],
   M05: [
     { label: 'QR en Sala', href: '/m05', icon: '🏪' },
@@ -93,7 +96,7 @@ export default function Sidebar() {
       {/* Navigation */}
       <nav style={{ flex: 1, padding: '0.75rem' }}>
         {navItems.map(({ label, href, icon }) => {
-          const isActive = pathname === href || (href !== '/m01' && href !== '/m02' && href !== '/m03' && href !== '/m05' && href !== '/m06' && pathname.startsWith(href));
+          const isActive = pathname === href || (href !== '/m01' && href !== '/m02' && href !== '/m03' && href !== '/m04' && href !== '/m05' && href !== '/m06' && pathname.startsWith(href));
           return (
             <Link
               key={href}

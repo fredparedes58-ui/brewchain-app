@@ -10,6 +10,9 @@ const PRECACHE_URLS = [
   '/m01',
   '/m02',
   '/m03',
+  '/m04',
+  '/m04/recibir',
+  '/m04/historial',
   '/m05',
   '/m06',
   '/m06/escanear',
@@ -112,5 +115,17 @@ self.addEventListener('notificationclick', (event) => {
   if (event.action === 'ver' || !event.action) {
     const url = event.notification.data?.url || '/';
     event.waitUntil(clients.openWindow(url));
+  }
+});
+
+// ── BACKGROUND SYNC — Parcelas offline ───────────────────
+self.addEventListener('sync', (event) => {
+  if (event.tag === 'sync-parcelas') {
+    event.waitUntil(
+      // Notificar a todos los clientes que hay sync disponible
+      self.clients.matchAll().then(clients => {
+        clients.forEach(client => client.postMessage({ type: 'SYNC_PARCELAS' }));
+      })
+    );
   }
 });

@@ -44,6 +44,13 @@
       "description": "Escanear pasaporte digital",
       "url": "/m06/escanear",
       "icons": [{ "src": "/icons/icon-96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Café+Tostado",
+      "short_name": "M04",
+      "description": "Tostadería · recibe lotes verdes y genera pasaportes QR",
+      "url": "/m04",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
     }
   ],
   "screenshots": [
